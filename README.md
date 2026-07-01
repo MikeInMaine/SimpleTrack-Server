@@ -1,6 +1,6 @@
-# SimpleTrack
+# SimpleTrack-Server
 
-A lightweight self-hosted family location tracker. No third-party services, 
+A lightweight self-hosted family location tracker for Android. No third-party services, 
 no subscriptions. Runs on a basic LAMP stack (Linux, Apache, MySQL, PHP).
 
 ## Features
@@ -19,7 +19,7 @@ no subscriptions. Runs on a basic LAMP stack (Linux, Apache, MySQL, PHP).
 - Let's Encrypt SSL (certbot)
 - Android phones running SimpleTrack client (free, Play Store)
 
-## Installation
+## Server Installation
 
 ### 1. Database setup
 ```sql
