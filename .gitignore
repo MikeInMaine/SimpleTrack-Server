@@ -1,0 +1,8 @@
+# Real config file with live credentials - never commit this.
+# Copy config/config.php.example to config/config.php on the server
+# and fill in real values there.
+config/config.php
+
+# Debug/log files
+debug.txt
+*.log

@@ -1,0 +1,33 @@
+<?php
+// config.php - Database and app configuration
+// Copy this to config.php and fill in your values
+
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'loctrack');
+define('DB_USER', 'loctrack');
+define('DB_PASS', 'your-db-password-here');
+
+define('HISTORY_HOURS',   24);
+define('OFFLINE_MINUTES', 60);
+
+// Each group has its own password and device list.
+// Device names must be unique across all groups.
+// To generate a password hash, run:
+//   php -r "echo password_hash('yourpassword', PASSWORD_DEFAULT);"
+define('GROUPS', [
+    'prestile' => [
+        'password_hash' => '$2y$10$REPLACE_WITH_REAL_HASH_FOR_PRESTILE',
+        'devices'       => ['Michael', 'Mary', 'Akiva'],
+        'label'         => 'Prestile',
+    ],
+    'smithfamily' => [
+        'password_hash' => '$2y$10$REPLACE_WITH_REAL_HASH_FOR_SMITHFAMILY',
+        'devices'       => ['Bob', 'Sue'],
+        'label'         => 'Smith Family',
+    ],
+]);
+
+// Auth cookie settings
+define('AUTH_SECRET', 'replace-with-a-long-random-string');
+define('AUTH_COOKIE', 'loctrack_auth');
+define('AUTH_DAYS',   30);

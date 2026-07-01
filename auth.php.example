@@ -1,0 +1,60 @@
+<?php
+// auth.php - Group-based cookie authentication
+// Copy this to auth.php and fill in your values from config.php
+
+// Pull shared constants from config
+require_once __DIR__ . '/config.php';
+
+// ── Token helpers ─────────────────────────────────────────────────────────────
+
+function auth_make_token(string $group): string {
+    $expires = time() + (AUTH_DAYS * 86400);
+    $payload = $expires . ':' . $group;
+    $sig     = hash_hmac('sha256', $payload, AUTH_SECRET);
+    return base64_encode($expires . ':' . $group . ':' . $sig);
+}
+
+function auth_verify(string $token): string|false {
+    $decoded = base64_decode($token);
+    if (!$decoded) return false;
+    $parts = explode(':', $decoded, 3);
+    if (count($parts) !== 3) return false;
+    [$expires, $group, $sig] = $parts;
+    if (time() > intval($expires)) return false;
+    $payload      = $expires . ':' . $group;
+    $expected_sig = hash_hmac('sha256', $payload, AUTH_SECRET);
+    if (!hash_equals($expected_sig, $sig)) return false;
+    // Confirm group still exists in config
+    $groups = GROUPS;
+    if (!isset($groups[$group])) return false;
+    return $group;
+}
+
+// ── Auth check — call at top of every protected page ─────────────────────────
+
+function auth_check(): string {
+    $token = $_COOKIE[AUTH_COOKIE] ?? '';
+    $group = $token ? auth_verify($token) : false;
+    if ($group !== false) return $group;
+    $redirect = urlencode($_SERVER['REQUEST_URI']);
+    header('Location: /login.php?redirect=' . $redirect);
+    exit;
+}
+
+// ── Group helpers ─────────────────────────────────────────────────────────────
+
+function group_devices(string $group): array {
+    return GROUPS[$group]['devices'] ?? [];
+}
+
+function all_devices(): array {
+    $devices = [];
+    foreach (GROUPS as $g) {
+        foreach ($g['devices'] as $d) $devices[] = $d;
+    }
+    return $devices;
+}
+
+function device_in_group(string $device, string $group): bool {
+    return in_array($device, group_devices($group));
+}
