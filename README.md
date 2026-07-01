@@ -1,4 +1,4 @@
-# LocTrack
+# SimpleTrack
 
 A lightweight self-hosted family location tracker. No third-party services, 
 no subscriptions. Runs on a basic LAMP stack (Linux, Apache, MySQL, PHP).
