@@ -17,7 +17,7 @@ no subscriptions. Runs on a basic LAMP stack (Linux, Apache, MySQL, PHP).
 - MySQL 8.0+
 - PHP 8.x
 - Let's Encrypt SSL (certbot)
-- Android phones running Traccar Client (free, Play Store)
+- Android phones running SimpleTrack client (free, Play Store)
 
 ## Installation
 
@@ -40,9 +40,6 @@ mysql -u root loctrack < setup_db.sql
 cp config/config.php.example config/config.php
 # Edit config/config.php with your real DB password, auth secret, and groups/devices
 ```
-`config/config.php` is excluded via `.gitignore` and will never be committed —
-it only needs to exist on the live server, not in the repo.
-
 Generate a password hash:
 ```bash
 php -r "echo password_hash('yourpassword', PASSWORD_DEFAULT);"
@@ -58,13 +55,11 @@ systemctl reload apache2
 ```
 
 ### 4. Traccar Client app (each phone)
-- Install **Traccar Client** from Play Store
+- Install **SimpleTrack** client from Play Store
 - Device identifier: firstname (must match DEVICES in config.php)
 - Server URL: `https://your.domain.com/track.php`
-- Frequency: 60 seconds
-- Distance: 50 meters
-- Angle: 45 degrees
-- Exempt from battery optimization: YES
+- Accept permissions on first run.
+- Exempt from battery optimization - Always
 
 ## Files
 | File | Purpose |
