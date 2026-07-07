@@ -55,7 +55,7 @@ systemctl reload apache2
 ```
 
 ### 4. Traccar Client app (each phone)
-- Install **SimpleTrack** client from Play Store https://play.google.com/apps/testing/com.prestile.simpletrack
+- Install **SimpleTrack** client from Play Store https://play.google.com/apps/testing/com.prestile.simpletrack (note: Simpletrack is in "Open Testing" on the Play Store).
 - Device identifier: firstname (must match DEVICES in config.php)
 - Server URL: `https://your.domain.com/track.php`
 - Accept permissions on first run.
