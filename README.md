@@ -11,6 +11,8 @@ no subscriptions. Runs on a basic LAMP stack (Linux, Apache, MySQL, PHP).
 - Stop history with per-device filtering
 - 30-day cookie authentication
 - Zero extra server processes — runs entirely within existing Apache/MySQL/PHP
+- Manual SOS button
+- Automatic (disableable) crash detection
 
 ## Requirements
 - Apache 2.4+
